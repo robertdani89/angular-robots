@@ -1,54 +1,65 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OktaAuthService } from '@okta/okta-angular';
-import {Product} from '../entities/product';
+//import { OktaAuthService } from '@okta/okta-angular';
+import {Robot} from '../entities/robot';
 
-
-const baseUrl = 'http://localhost:4201';
+const baseUrl = `http://${window.location.hostname}:4201`;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductsService {
+export class RobotsService {
 
-  constructor(public oktaAuth: OktaAuthService, private http: HttpClient) {
+  constructor(/*public oktaAuth: OktaAuthService,*/ private http: HttpClient) {
   }
 
   private async request(method: string, url: string, data?: any): Promise<any> {
-    const token = await this.oktaAuth.getAccessToken();
-
-    console.log('request ' + JSON.stringify(data));
+    //const token = await this.oktaAuth.getAccessToken();
     const result = this.http.request(method, url, {
       body: data,
       responseType: 'json',
       observe: 'body',
-      headers: {
+      /*headers: {
         Authorization: `Bearer ${token}`
-      }
+      }*/
     });
 
     return result.toPromise();
   }
 
-  getProducts(): Promise<any> {
-    return this.request('get', `${baseUrl}/product`);
+  getRobots(): Promise<any> {
+    return this.request('get', `${baseUrl}/robots`);
   }
 
-  getProduct(id: string): Promise<any> {
-    return this.request('get', `${baseUrl}/product/${id}`);
+  getBenderDetails(robotId: number): Promise<any> {
+    return this.request('get', `${baseUrl}/robots/bender/${robotId}`);
   }
 
-  createProduct(product: Product): Promise<any> {
-    console.log('createProduct ' + JSON.stringify(product));
-    return this.request('post', `${baseUrl}/product`, product);
+  getBeerBotDetails(robotId: number): Promise<any> {
+    return this.request('get', `${baseUrl}/robots/beerbot/${robotId}`);
   }
 
-  updateProduct(product: Product): Promise<any> {
-    console.log('updateProduct ' + JSON.stringify(product));
-    return this.request('post', `${baseUrl}/product/${product.id}`, product);
+  getRobot(id: string): Promise<any> {
+    return this.request('get', `${baseUrl}/robots/${id}`);
   }
 
-  deleteProduct(id: string): Promise<any> {
-    return this.request('delete', `${baseUrl}/product/${id}`);
+  createBenderRobot(): Promise<any> {
+    return this.request('post', `${baseUrl}/robots`, {name: 'New Bender', modelId: 1});
+  }
+
+  createBeerRobot(): Promise<any> {
+    return this.request('post', `${baseUrl}/robots`, {name: 'New BeerBot', modelId: 2});
+  }
+
+  updateRobot(robot: Robot): Promise<any> {
+    return this.request('post', `${baseUrl}/robots/${robot.id}`, robot);
+  }
+
+  deleteRobot(id: number): Promise<any> {
+    return this.request('delete', `${baseUrl}/robots/${id}`);
+  }
+
+  pourBeer(robot: Robot): Promise<any> {
+    return this.request('post', `${baseUrl}/robots/beerbotbeer/${robot.id}`);
   }
 }

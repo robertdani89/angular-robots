@@ -1,0 +1,20 @@
+<div [ngClass]="{working: beerRobot.isWorking}">
+  <h2>{{beerRobot.name}}</h2>
+  <label>Model Type: BeerBot</label>
+  <label>Name
+    <input [disabled]="beerRobot.isWorking" type="text" [(ngModel)]="beerRobot.name" (blur)="updateRobot()">
+  </label>
+  <label>Description
+    <input [disabled]="beerRobot.isWorking" type="text" [(ngModel)]="beerRobot.description" (blur)="updateRobot()">
+  </label>
+  <label>Serving Time In Seconds
+    <input [disabled]="beerRobot.isWorking" type="text" [(ngModel)]="beerRobot.servingTimeInSeconds"
+           (blur)="updateRobot()">
+  </label>
+  <label>Beers Served
+    <input disabled type="text" [(ngModel)]="beerRobot.beersServed">
+  </label>
+  <button [disabled]="beerRobot.isWorking" mat-flat-button color="primary" (click)="addBeer()">
+    {{beerRobot.isWorking ? 'Serving...' : 'Pout me a drink'}}
+  </button>
+</div>

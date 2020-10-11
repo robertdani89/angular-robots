@@ -1,0 +1,32 @@
+<div [ngClass]="{working: benderRobot.isWorking}">
+  <h2>{{benderRobot.name}} {{benderRobot.isWorking ? 'Working! ' + benderRobot.workProgress + '%' : ''}}</h2>
+  <label>Model Type: Bender</label>
+  <label>Name
+    <input [disabled]="benderRobot.isWorking" type="text" [(ngModel)]="benderRobot.name" (blur)="updateRobot()">
+  </label>
+  <label>Description
+    <input [disabled]="benderRobot.isWorking" type="text" [(ngModel)]="benderRobot.description" (blur)="updateRobot()">
+  </label>
+  <label>Current Angle
+    <input disabled type="text" [(ngModel)]="benderRobot.currentAngle">
+  </label>
+  <label>Target Angle
+    <input [disabled]="benderRobot.isWorking" min="0" max="360" type="text" [(ngModel)]="benderRobot.targetAngle"
+           (blur)="updateRobot()">
+  </label>
+  <label>Starting Angle
+    <input [disabled]="benderRobot.isWorking" min="0" max="360" type="text" [(ngModel)]="benderRobot.startingAngle"
+           (blur)="updateRobot()">
+  </label>
+  <label>Bending Speed In Angles Per Seconds
+    <input [disabled]="benderRobot.isWorking" min="0" max="360" type="text"
+           [(ngModel)]="benderRobot.bendingSpeedInAnglesPerSeconds" (blur)="updateRobot()">
+  </label>
+  <label>Speed When Empty In Angles Per Second
+    <input [disabled]="benderRobot.isWorking" min="0" max="360" type="text"
+           [(ngModel)]="benderRobot.speedWhenEmptyInAnglesPerSecond" (blur)="updateRobot()">
+  </label>
+  <button [disabled]="benderRobot.isWorking" mat-flat-button color="primary" (click)="benderRobot.run({})">
+    {{benderRobot.isWorking ? 'Bending...' + benderRobot.workProgress + '%' : 'Run bending'}}
+  </button>
+</div>
