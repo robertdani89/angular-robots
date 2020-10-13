@@ -2,9 +2,9 @@
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
     <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
     <button mat-button routerLink="/robots">Robots</button>
-    <button mat-button onclick="location.href='https://www.linkedin.com/in/robert-dani-26b8b354/';">My LinkedIn</button>
-    <button mat-button onclick="location.href='https://github.com/robertdani89/angular-robots';">Angular GitHub</button>
-    <button mat-button onclick="location.href='https://github.com/robertdani89/nodejs-rest';">NodeJs Github</button>
+    <button mat-button><a href="https://www.linkedin.com/in/robert-dani-26b8b354/">My LinkedIn</a></button>
+    <button mat-button><a href="https://github.com/robertdani89/angular-robots">Angular GitHub</a></button>
+    <button mat-button><a href="https://github.com/robertdani89/nodejs-rest">NodeJs Github</a></button>
     <button mat-button *ngIf="!isAuthenticated" (click)="login()"> Login </button>
     <button mat-button *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
   </div>
@@ -15,11 +15,13 @@
 <mat-menu x-position="before" #menu="matMenu">
   <button mat-menu-item routerLink="/"><mat-icon>home</mat-icon> Home</button>
   <button mat-menu-item routerLink="/products">Robots</button>
-  <button mat-menu-item onclick="location.href='https://www.linkedin.com/in/robert-dani-26b8b354/';">My LinkedIn</button>
-  <button mat-menu-item onclick="location.href='https://github.com/robertdani89/angular-robots';">Angular GitHub</button>
-  <button mat-menu-item onclick="location.href='https://github.com/robertdani89/nodejs-rest';">NodeJs Github</button>
+  <button mat-menu-item><a href="https://www.linkedin.com/in/robert-dani-26b8b354/">My LinkedIn</a></button>
+  <button mat-menu-item><a href="https://github.com/robertdani89/angular-robots">Angular GitHub</a></button>
+  <button mat-menu-item><a href="https://github.com/robertdani89/nodejs-rest">NodeJs Github</a></button>
   <button mat-menu-item *ngIf="!isAuthenticated" (click)="login()"> Login </button>
   <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()"> Logout </button>
 </mat-menu>
 
-<router-outlet></router-outlet>
+<div [@routeAnimations]="prepareRoute(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>

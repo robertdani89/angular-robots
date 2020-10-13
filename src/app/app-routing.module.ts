@@ -7,11 +7,13 @@ import {RobotsComponent} from './robots/robots.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {animation: 'HomePage'}
   },
   {
     path: 'robots',
     component: RobotsComponent,
+    data: {animation: 'RobotsPage'}
     //canActivate: [OktaAuthGuard]
   },
  /* {
